@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CALCULATOR</title>
+</head>
+<body>
+<form id="calc_form" name="input" action="calculator.html" method="post">
+
+<p>First number:<br/>
+<input id="first" type="text" name="first"></p>
+<p>Second number:<br/>
+<input id="second" type="text" name="second"></p>
+
+<input id="add" type="radio" name="operation" value="add"> addition<br>
+<input id="subtract" type="radio" name="operation" value="subtract"> subtraction<br>
+<input id="multiply" type="radio" name="operation" value="multiply"> multiplication<br>
+<input id="divide" type="radio" name="operation" value="divide"> division<br> 
+
+</form>
+
+<div id="answer"></div>
+
+
+<script type="text/javascript">
+    document.getElementById("multiply").addEventListener("click", calculate, false);
+    document.getElementById("divide").addEventListener("click", calculate, false);
+    document.getElementById("subtract").addEventListener("click", calculate, false);
+    document.getElementById("add").addEventListener("click", calculate, false);
+        var num1;
+        var num2;
+        
+        document.getElementById("first").addEventListener("keyup", function(event){
+            num1=Number(this.value);
+        }, false);
+        document.getElementById("second").addEventListener("keyup", function(event){
+            num2=Number(this.value);
+        }, false);
+
+    document.getElementById("first").addEventListener("keyup", calculate, false);
+    document.getElementById("second").addEventListener("keyup", calculate, false);
+
+
+    function calculate(){        
+        if((isNaN(num1) || isNaN(num2)) && (document.getElementById("multiply").checked || document.getElementById("divide").checked
+                                            || document.getElementById("subtract").checked || document.getElementById("add").checked) ){
+                 document.getElementById("answer").textContent = "Make sure both inputs are valid numbers";        
+        
+                return;
+        } else if (document.getElementById("add").checked) {
+            var added = num1+num2;
+            document.getElementById("answer").textContent = "Answer: " + added;
+        } else if (document.getElementById("subtract").checked) {
+            var subtracted = num1-num2;
+            document.getElementById("answer").textContent = "Answer: " + subtracted;
+        } else if (document.getElementById("multiply").checked) {
+            var multiplied = num1*num2;
+            document.getElementById("answer").textContent = "Answer: " + multiplied;
+        } else if (document.getElementById("divide").checked) {
+            if (num2==0) {
+                document.getElementById("answer").textContent = "Cannot divide by zero";
+            } else{
+                var divided = num1/num2;
+                document.getElementById("answer").textContent = "Answer: " + divided;
+            }
+        } else{
+                document.getElementById("answer").textContent = "Choose an operator"; 
+        }
+
+    }
+    
+    
+</script>
+</body>
+</html>
